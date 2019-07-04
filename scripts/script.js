@@ -1,57 +1,65 @@
 'use scrict';
+let money = +prompt('Ваш месячный доход?'),
+    income = "freelance",
+    mission = 30000,
+    addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую:'),
+    deposit = confirm('Есть ли у вас депозит в банке?'),
+    question1 = prompt("Какие обязательные ежемесячные расходы у вас есть?"),
+    question2 = +prompt("Во сколько это обойдется?"), 
+    question3 = prompt("Какие обязательные ежемесячные расходы у вас есть?"),
+    question4 = +prompt("Во сколько это обойдется?"); 
 
-//1
-let money = +prompt('Ваш месячный доход?');
-console.log(money);
-
-//2
-let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую:');
-console.log(addExpenses);
-
-//3
-let deposit = confirm('Есть ли у вас депозит в банке?');
-console.log(deposit);
-
-//4
-console.log(typeof money);
-console.log(typeof addExpenses);
-console.log(typeof deposit);
-
-//5
-let question1 = prompt("Какие обязательные ежемесячные расходы у вас есть?");
-//console.log(question1.split(', '));
-console.log(question1);
-let question2 = +prompt("Во сколько это обойдется?"); 
-console.log(question2);
-let question3 = prompt("Какие обязательные ежемесячные расходы у вас есть?");
-console.log(question3);
-let question4 = +prompt("Во сколько это обойдется?"); 
-console.log(question4);
-
-//6
 let budgetMonth = money - question2 - question4;
-console.log("Budget month: " + budgetMonth);
 
-//7
-let mission = 30000;
 let period = mission / budgetMonth;
-console.log("Period: " + Math.ceil(period));
 
-//8
 let budgetDay = budgetMonth / 30;
-console.log("Budget day: " + Math.floor(budgetDay));
 
-//9
-if(budgetDay > 800) {
-    console.log("Высокий уровень доход");
+
+let showTypeof = function(item) {
+    console.log(item, typeof item);
 }
-else if(budgetDay > 300 && budgetDay <= 800) {
-    console.log("Средний уровень дохода");
+
+showTypeof(money);
+showTypeof(income);
+showTypeof(deposit); 
+
+function getStatusIncome() {
+    if(budgetDay > 800) {
+    return ("Высокий уровень доход");
+    }
+    else if(budgetDay > 300 && budgetDay <= 800) {
+    return ("Средний уровень дохода");
+    }
+    else if(budgetDay >= 0 && budgetDay <= 300){
+    return ("Низкий уровень дохода");
+    }
+    else {
+    return ("Что то пошло не так");
+    }    
 }
-else if(budgetDay >= 0 && budgetDay <= 300) {
-    console.log("Низкий уровень дохода");
+
+console.log("getStatusIncome(): ", getStatusIncome());
+ 
+//1-a
+let getExpensesMonth = function() {
+    return question2 + question4
 }
-else {
-    console.log("Что то пошло не так");
-}    
-  
+
+console.log("Cуммa всех расходов за месяц: ", getExpensesMonth());
+
+//1-b
+function getAccumulatedMonth() {
+    return money - getExpensesMonth();
+}
+
+let accumulatedMonth = getAccumulatedMonth();
+console.log("Накопления за месяц: " + accumulatedMonth); 
+
+//1-c
+function getTargetMonth() 
+{
+    return Math.ceil(mission/ getAccumulatedMonth());
+}
+console.log("за какой период будет достигнута цель: " + getTargetMonth());
+ 
