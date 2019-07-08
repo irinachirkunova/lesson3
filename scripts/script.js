@@ -14,8 +14,11 @@ showArrayOfNumbers(array);
 
 //2
 function showSimpleNumbers() {
-    for (var i = 2; i <= 100; i++){
-        for(var j = 2; j <= i; j++){
+    let i,
+        j;
+
+    for (i = 2; i <= 100; i++){
+        for(j = 2; j <= i; j++){
             if (i % j == 0) break;
         }
         if(j == i) console.log("Простое число: " + i + " Делителя данного числа: 1, " + j);
